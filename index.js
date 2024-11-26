@@ -26,16 +26,6 @@ async function run() {
       .db("MetroMeal")
       .collection("varificationRequest");
 
-    const notificationCollection = client.db("Turf").collection("notification");
-    const turfCollection = client.db("Turf").collection("TurfInfo");
-    const bookingCollection = client.db("Turf").collection("booking");
-    const holdCollection = client.db("Turf").collection("hold");
-    const shopCollection = client.db("Turf").collection("Shop");
-    const advertisedCollection = client.db("Turf").collection("advertise");
-    const shopOrderCollection = client.db("Turf").collection("ShopOrder");
-    const customOrderCollection = client.db("Turf").collection("customOrder");
-    const wishlistCollection = client.db("Turf").collection("wishList");
-
     app.get("/users", async (req, res) => {
       let query = {};
       if (req.query.email) {
@@ -75,19 +65,20 @@ async function run() {
       res.send(result);
     });
     app.patch("/users/:id", async (req, res) => {
+      console.log("hitted");
       const id = req.params.id;
       let query = {};
       const options = { upsert: true };
       let updatedDoc = {
         $set: {},
       };
-      if (req.body.data) {
-        console.log(req.body.data);
+      if (req.body) {
+        console.log(req.body);
         query = { _id: new ObjectId(id) };
         updatedDoc = {
           $set: {
-            number: req.body.data.number,
-            varify: req.body.data.varify,
+            number: req.body.number,
+            varify: req.body.varify,
           },
         };
       }
