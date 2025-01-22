@@ -269,4 +269,4 @@ app.get("/", async (req, res) => {
   res.send("Turf server is running");
 });
 
-app.listen(port, () => console.log(`Turf server is running on ${port}`));
+app.listen(port, () => console.log(`meal server is running on ${port}`));
