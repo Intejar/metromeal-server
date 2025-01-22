@@ -26,44 +26,44 @@ async function run() {
       .db("MetroMeal")
       .collection("varificationRequest");
 
-    // app.get("/users", async (req, res) => {
-    //   let query = {};
-    //   if (req.query.email) {
-    //     query = { email: req.query.email };
-    //   }
-    //   if (req.query.role) {
-    //     query = { role: req.query.role };
-    //   }
-    //   const result = await usersCollection.find(query).toArray();
-    //   res.send(result);
-    // });
-    // app.get("/allUsers", async (req, res) => {
-    //   let query = {};
-    //   const result = await usersCollection.find(query).toArray();
-    //   res.send(result);
-    // });
+    app.get("/users", async (req, res) => {
+      let query = {};
+      if (req.query.email) {
+        query = { email: req.query.email };
+      }
+      if (req.query.role) {
+        query = { role: req.query.role };
+      }
+      const result = await usersCollection.find(query).toArray();
+      res.send(result);
+    });
+    app.get("/allUsers", async (req, res) => {
+      let query = {};
+      const result = await usersCollection.find(query).toArray();
+      res.send(result);
+    });
 
-    // app.post("/users", async (req, res) => {
-    //   const user = req.body;
-    //   const result = await usersCollection.insertOne(user);
-    //   res.send(result);
-    // });
-    // app.patch("/users/verify", async (req, res) => {
-    //   const email = req.query.email;
-    //   const filter = { email: email };
-    //   const options = { upsert: true };
-    //   const updatedDoc = {
-    //     $set: {
-    //       varify: "True",
-    //     },
-    //   };
-    //   const result = await usersCollection.updateOne(
-    //     filter,
-    //     updatedDoc,
-    //     options
-    //   );
-    //   res.send(result);
-    // });
+    app.post("/users", async (req, res) => {
+      const user = req.body;
+      const result = await usersCollection.insertOne(user);
+      res.send(result);
+    });
+    app.patch("/users/verify", async (req, res) => {
+      const email = req.query.email;
+      const filter = { email: email };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          varify: "True",
+        },
+      };
+      const result = await usersCollection.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
+      res.send(result);
+    });
     app.patch("/users/:id", async (req, res) => {
       console.log("hitted");
       const id = req.params.id;
